@@ -16,9 +16,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.edu.nju.candleflame.architecturedemo.dagger.unuse.NoDaggerFragment;
+import cn.edu.nju.candleflame.architecturedemo.dagger.use.DaggerFragment;
 import cn.edu.nju.candleflame.architecturedemo.frp.FrpFragment;
 import cn.edu.nju.candleflame.architecturedemo.mvc.view.MVCFragment;
 import cn.edu.nju.candleflame.architecturedemo.mvp.view.MVPFragment;
+import cn.edu.nju.candleflame.architecturedemo.mvvm.MvvmFragment;
 
 public class Main extends AppCompatActivity {
 
@@ -100,8 +103,10 @@ public class Main extends AppCompatActivity {
 
             this.fragmentList.add(new MVCFragment());
             this.fragmentList.add(new MVPFragment());
+            this.fragmentList.add(new MvvmFragment());
             this.fragmentList.add(new FrpFragment());
-
+            this.fragmentList.add(new NoDaggerFragment());
+            this.fragmentList.add(new DaggerFragment());
 
         }
 
@@ -112,7 +117,7 @@ public class Main extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
+
             return fragmentList.size();
         }
     }

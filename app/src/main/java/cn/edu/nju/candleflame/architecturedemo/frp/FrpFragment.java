@@ -12,10 +12,7 @@ import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.view.RxView;
 
-
 import cn.edu.nju.candleflame.architecturedemo.R;
-import io.reactivex.Observable;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 
 public class FrpFragment extends Fragment{
