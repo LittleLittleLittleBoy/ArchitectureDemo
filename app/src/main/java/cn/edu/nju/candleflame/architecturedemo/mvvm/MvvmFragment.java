@@ -21,8 +21,6 @@ public class MvvmFragment extends Fragment implements View.OnClickListener {
     SimpleCal simpleCal  ;  // View Model
 
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
