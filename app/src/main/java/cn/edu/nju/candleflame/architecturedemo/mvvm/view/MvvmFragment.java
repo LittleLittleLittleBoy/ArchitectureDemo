@@ -1,7 +1,6 @@
-package cn.edu.nju.candleflame.architecturedemo.mvvm;
+package cn.edu.nju.candleflame.architecturedemo.mvvm.view;
 
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,13 +11,14 @@ import android.widget.Button;
 import cn.edu.nju.candleflame.architecturedemo.databinding.FragmentMvvmdemoBinding;
 
 import cn.edu.nju.candleflame.architecturedemo.R;
+import cn.edu.nju.candleflame.architecturedemo.mvvm.viewmodel.SimpleCal;
 
 
 public class MvvmFragment extends Fragment implements View.OnClickListener {
 
     private View rootView;
 
-    SimpleCal simpleCal  ;  // View Model
+    SimpleCal simpleCal  ;  // View CounterModel
 
 
     @Override
