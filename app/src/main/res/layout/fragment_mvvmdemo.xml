@@ -3,7 +3,7 @@
 
     <data>
         <variable name="sc"
-            type="cn.edu.nju.candleflame.architecturedemo.mvvm.SimpleCal" />
+            type="cn.edu.nju.candleflame.architecturedemo.mvvm.viewmodel.SimpleCal" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout
