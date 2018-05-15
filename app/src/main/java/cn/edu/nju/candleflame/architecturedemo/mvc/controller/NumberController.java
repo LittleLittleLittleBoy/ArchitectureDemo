@@ -10,26 +10,12 @@ public class NumberController {
         numberModel = new NumberModel();
     }
 
-    public void plusOne(OnPlusListener listener){
-        numberModel.Plus();
-        if (listener != null) {
-            listener.onComplete(numberModel);
-        }
+    public void plusOne(MVCFragment.onPlusListener listener){
+        numberModel.Plus(listener);
     }
 
-    public void minusOne(OnMinusListener listener){
-        numberModel.Minus();
-        if (listener != null) {
-            listener.onComplete(numberModel);
-        }
-    }
+    public void minusOne(MVCFragment.onMinusListener listener){
+        numberModel.Minus(listener);
 
-    public interface OnPlusListener {
-        void onComplete(NumberModel numberModel);
     }
-
-    public interface OnMinusListener {
-        void onComplete(NumberModel numberModel);
-    }
-
 }
