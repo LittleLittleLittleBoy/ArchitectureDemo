@@ -1,6 +1,7 @@
 package cn.edu.nju.candleflame.architecturedemo.mvc.controller;
 
 import cn.edu.nju.candleflame.architecturedemo.mvc.model.NumberModel;
+import cn.edu.nju.candleflame.architecturedemo.mvc.view.MVCFragment;
 
 public class NumberController {
 
