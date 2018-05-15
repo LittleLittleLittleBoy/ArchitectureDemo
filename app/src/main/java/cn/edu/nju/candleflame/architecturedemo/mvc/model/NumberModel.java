@@ -1,6 +1,7 @@
 package cn.edu.nju.candleflame.architecturedemo.mvc.model;
 
 import cn.edu.nju.candleflame.architecturedemo.mvc.bean.NumberBean;
+import cn.edu.nju.candleflame.architecturedemo.mvc.view.MVCFragment;
 
 public class NumberModel {
 
