@@ -7,7 +7,7 @@ public class NumberModel {
     NumberBean number;
 
     public NumberModel(){
-        number = new NumberBean();
+        number = new Number();
     }
 
     public int getNum(){
@@ -17,10 +17,16 @@ public class NumberModel {
         number.setNum(num);
     }
 
-    public void Plus(){
+    public void Plus(MainActivity.onPlusListener listener){
         number.setNum(number.getNum()+1);
+        if (listener != null) {
+            listener.onComplete(this);
+        }
     }
-    public void Minus(){
+    public void Minus(MainActivity.onMinusListener listener){
         number.setNum(number.getNum()-1);
+        if (listener != null) {
+            listener.onComplete(this);
+        }
     }
 }
