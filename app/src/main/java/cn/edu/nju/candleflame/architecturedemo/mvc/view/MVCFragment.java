@@ -43,7 +43,7 @@ public class MVCFragment extends Fragment implements View.OnClickListener {
                 numberController.plusOne(new onPlusListener() {
                     @Override
                     public void onComplete(NumberModel numberModel) {
-                        TextView textView = (TextView)findViewById(R.id.mvc_number);
+                        TextView textView = (TextView)rootview.findViewById(R.id.mvc_number);
                         textView.setText(String.valueOf(numberModel.getNum()));
                     }
                 });
@@ -52,7 +52,7 @@ public class MVCFragment extends Fragment implements View.OnClickListener {
                 numberController.minusOne(new onMinusListener() {
                     @Override
                     public void onComplete(NumberModel numberModel) {
-                        TextView textView = (TextView)findViewById(R.id.mvc_number);
+                        TextView textView = (TextView)rootview.findViewById(R.id.mvc_number);
                         textView.setText(String.valueOf(numberModel.getNum()));
                     }
                 });
