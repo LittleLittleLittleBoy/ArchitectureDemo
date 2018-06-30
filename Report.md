@@ -148,8 +148,7 @@ MVP模式在MVC模式的基础上，改善了模块间耦合的问题，提高�
    ```
 
    （2）修改layout.fragment_mvvmdemo.xml文件 
-
-    	使用数据绑定之后，无需再通过findViewById或者注解框架去设置数据，布局文件就不再用于单纯地展示界面元素，还需要定义界面元素用到的变量。它的根节点由 ViewGroup变成了 layout，并且新增了一个节点 data。Data节点用来声明需要与视图绑定的视图模型。
+ 	使用数据绑定之后，无需再通过findViewById或者注解框架去设置数据，布局文件就不再用于单纯地展示界面元素，还需要定义界面元素用到的变量。它的根节点由 ViewGroup变成了 layout，并且新增了一个节点 data。Data节点用来声明需要与视图绑定的视图模型。
 
    ```
    <layout xmlns:android="http://schemas.android.com/apk/res/android">
