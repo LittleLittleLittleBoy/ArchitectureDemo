@@ -85,174 +85,40 @@ MVP模式在MVC模式的基础上，改善了模块间耦合的问题，提高�
 
 ## MVVM
 
-### **背景——MVC、MVP模式下可能存在的问题**
+### 内容总结 
 
-- MVC设计模式中，View负责展示，Model负责数据，Controller作为控制中心的同时，还承担了展示逻辑的职责——model提供的数据往往要经过封装才能交给视图。  Controller 往往会变得臃肿，难以复用。
-- MVP设计模式中， view和presenter会互相持有引用，互相做回调 ，导致耦合度高；其次，在实际编码过程中，一旦视图需要变更，比如更改控件（比如用TextView 替换 EditText），那么Presenter也要相应的做变更了，这样做代码的可修改性差；再者，类似于MVC，复杂的业务会导致presenter过于臃肿 。
+在课程报告中提出了MVC、MVP设计模式中可能存在的问题，由此引出了MVVM（Model–view–view model）软件架构设计模式。
 
-### MVVM概述
+MVVM组成部分包括模型（Model）、视图（View）、视图模型（View Model）。模型（Model）指的是代表真实状态内容的领域模型（面向对象），或指代表内容的数据访问层（以数据为中心），视图（View）就像在MVC和MVP模式中一样，视图是用户在屏幕上看到的结构、布局和外观，视图模型（View Model）是暴露公共属性和命令的视图的抽象。
 
-- #### MVVM组成部分
+MVVM的设计思想是利用WPF（Windows Presentation Foundation，微软推出的基于Windows 的用户界面框架）下的数据绑定(Data Binding)、依赖属性(Dependency Property)、命令(Command)、路由事件(Routed Event)等新特性，打造了一个更加灵活高效的架构。 
 
-  MVVM（Model–view–view model）是一种软件架构模式，其组成部分有模型（Model）、视图（View）、视图模型（View Model）。
+最后我们为一个MVC模式的计数器Demo重新设计为MVVM模式，以此清晰地展示MVVM的数据绑定的特点。
 
-  ```
-  - 模型（Model）指的是代表真实状态内容的领域模型（面向对象），或指代表内容的数据访问层（以数据为中心）。
-  - 视图（View）就像在MVC和MVP模式中一样，视图是用户在屏幕上看到的结构、布局和外观（UI）
-  - 视图模型（View Model）是暴露公共属性和命令的视图的抽象。
-  ```
+### 内容补充
 
-- #### 理论基础
+MVVM旨在利用WPF中的数据绑定函数，通过从视图层中几乎删除所有GUI代码（代码隐藏），更好地促进视图层开发与模式其余部分的分离，使MVVM设计模式下的应用程序具有层次性。因此，应用程序的层次可以在多个工作流中进行开发以提高生产力。角色的分离使得交互设计师可以专注于用户体验需求，而不是对业务逻辑进行编程。用户体验（UX）开发人员不需要编写GUI代码，他们可以使用框架标记语言（如XAML），使UI与应用程序开发人员编写和维护的视图模型的数据绑定起来。即使一个开发人员在整个代码库上工作，视图与模型的适当分离也会更加高效，因为基于最终用户反馈，用户界面通常在开发周期中经常发生变化，而且处于开发周期后期。
 
-  MVVM的设计思想是利用WPF（Windows Presentation Foundation，微软推出的基于Windows 的用户界面框架）下的数据绑定(Data Binding)、依赖属性(Dependency Property)、命令(Command)、路由事件(Routed Event)等新特性，打造了一个更加灵活高效的架构。 
+WPF中的依赖属性有别于.NET中的属性，因为在WPF中有几个很重要的特征都需要依赖项属性的支持，例如数据绑定、动画、样式设置等。WPF绝大多数属性都是依赖项属性，只不过它是用了普通的.NET属性过程进行了包装，通过这种包装，就可以像使用属性一样使用依赖项属性。
 
-  - 数据绑定(Data Binding)	
+命令是 Windows Presentation Foundation (WPF) 中的输入机制，它提供的输入处理比设备输入具有更高的语义级别。Commands 可以很好地与 MVVM 模式 (Model- View-ViewModel)结合在一起。视图（view）通过使用WPF 命令（ Commands ）来得知并调用与其绑定的视图模型（ViewModel），这是视图更新模型的一种机制。
 
-  > MVVM旨在利用WPF中的数据绑定函数，通过从视图层中几乎删除所有GUI代码（代码隐藏），更好地促进视图层开发与模式其余部分的分离，使MVVM设计模式下的应用程序具有层次性。
-  >
-  > 因此，应用程序的层次可以在多个工作流中进行开发以提高生产力。角色的分离使得交互设计师可以专注于用户体验需求，而不是对业务逻辑进行编程。用户体验（UX）开发人员不需要编写GUI代码，他们可以使用框架标记语言（如XAML），使UI与应用程序开发人员编写和维护的视图模型的数据绑定起来。
-  >
-  > 即使一个开发人员在整个代码库上工作，视图与模型的适当分离也会更加高效，因为基于最终用户反馈，用户界面通常在开发周期中经常发生变化，而且处于开发周期后期。
+为了降低由事件订阅带来的耦合度和代码量，WPF推出了路由事件机制。WPF把消息机制封装成了更容易让人理解的事件模型，一个事件包含3个关键点：事件的拥有者、事件的响应者、事件的订阅关系。路由事件与传统的直接事件的区别在于，直接事件激发时发送者直接将消息通过事件订阅交送给事件响应者，事件响应者使用其事件处理器方法対事件的发生做出响应、驱动程序逻辑按客户需求运行，而路由事件的事件拥有者与事件响应者之间没有直接显示的订阅关系，事件的拥有者只负责激发事件，事件将由谁响应它并不知道，时间的响应者则安装有事件侦听器，针对某类事件进行侦听，当有此类事件传递过来，事件响应者就使用事件处理器来响应事件并决定事件是否可以继续传递。简单地说，路由事件的原理是： 舍弃直接事件响应者，让不同的控件变成监听者。 而事件拥有者，只负责发出事件。
 
-  在数据绑定出现以前，我们在实现界面时，不可避免的编写各种更新 View 属性的 setter：比如
+MVVM具有良好的可测试性。通常来说, 要进行界面测试比较困难,  比如在MVC架构中，我们不得不实例化一个完整的 Controller     以及伴随的 View , 然后去测试View 中的值。现在在MVVM的架构下，展示逻辑移入了View Model，表示逻辑与实际表示分离，然后对View Model的展示逻辑进行测试。
 
-  `setText()，setVisibility()，setEnabled ()` 等等。这些代码数量越多，越容易滋生 bug，代码的可修改性也会下降。使用数据绑定后，视图的数据直接与视图模型进行绑定，可以避免大量书写这些代码。
+### 内容反思
 
-  比如，如下是Android开发中一段Java代码，其目的是查找视图的一个文本元素，并设定该文本内容的属性：
+对MVVM模式优缺点的一些讨论
 
-  ```
-  numText=(TextView)rootView.findViewById(R.id.mvp_numb);
-  numText.setText(String.valueOf(num));
-  ```
-
-  使用数据绑定的方法，可以在布局文件中以一种简洁的形式代替，如下：
-
-  ```
-  android:text="@{sc.number}" 
-  ```
-
-  其中sc是MVVM中视图模型（View Model）的变量名，number是sc的一个成员变量，这样元素的属性就与视图模型绑定在一起了。
-
-### 代码实践
-
-1. 对于Android开发的MVC架构的计数器Demo，改用MVVM架构。
-
-   实践过程：
-
-   （1）修改代码或者配置文件，设定 View Model 和 View 的映射关系。 
-
-   ​	在gradle文件中添加数据绑定的代码声明，使得之后构建系统会对数据绑定启用附加处理。 
-
-   ```
-   dataBinding{ enabled = true }
-   ```
-
-   （2）修改layout.fragment_mvvmdemo.xml文件 
- 	使用数据绑定之后，无需再通过findViewById或者注解框架去设置数据，布局文件就不再用于单纯地展示界面元素，还需要定义界面元素用到的变量。它的根节点由 ViewGroup变成了 layout，并且新增了一个节点 data。Data节点用来声明需要与视图绑定的视图模型。
-
-   ```
-   <layout xmlns:android="http://schemas.android.com/apk/res/android">
-   
-       <data>
-           <variable name="sc"
-               type="cn.edu.nju.candleflame.architecturedemo.mvvm.viewmodel.SimpleCal" />
-       </data>
-       
-       ...
-       
-       <EditText
-               android:id="@+id/mvvm_number"
-               ...
-               android:text="@={sc.number}"/>
-   
-   ...
-   
-   ```
-
-   在布局中通过 “@{具体变量或者对象的属性值}” 直接把Java中定义的属性值赋值给UI元素中的某个属性.
-
-   （3）编写MainActivity 
-
-   ​	数据绑定库通过自动生成**绑定类**为我们完成数据绑定的工作。要获取布局的相应绑定类的实例，就要用到库提供的辅助方法--Activity 对应使用 `DataBindingUtil.setContentView()` ，Fragment使用`DataBindingUtil.inflate()`
-
-   ```
-   	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                Bundle savedInstanceState) {
-           FragmentMvvmdemoBinding binding = DataBindingUtil.inflate(inflater,
-                   R.layout.fragment_mvvmdemo, container, false);
-           simpleCal=new SimpleCal();
-           binding.setSc(simpleCal);
-          
-   		...
-   		
-           return binding.getRoot();
-       }
-   ```
-
-   （4）定义视图模型和模型
-
-   ​	此步骤较为简单，由于篇幅原因，故省略。可以直接参考代码。
-
-2. 对于该MVVM架构的计数器，进行功能的扩展：使展示数字的文本框可以被编辑，并且根据编辑后的数字重新判断新的年份是平年还是闰年。
-
-   实践过程：
-
-   （1）修改xml文件：
-
-   ```
-   <EditText
-   
-   	... 
-   	
-     	android:text="@={sc.number}"/>
-   ```
-
-   这里由原项目代码`android:text="@{sc.number}"`修改而来。"="符号所起的作用是完成数据的双向绑定，这意味着这一个EditText的文本属性发生的更改，能够触发视图模型里的属性也随之更改。 
-
-   （2）修改模型：对CounterModel稍作修改，修改原因见3。 
-
-   ```
-   public class CounterModel {
-   	
-   	...
-   	
-       public void update(SimpleCal sc) {
-           int i = Integer.parseInt(sc.number) ;
-           setYear(i);
-       }
-   }
-   ```
-
-   （3）修改视图模型：修改`setNumber()`的参数类型，并引入`update()`。主要是由于视图输入的数字是String类型，因此必须修改参数类型来接收数据。
-
-   ```
-       @Bindable
-       public void setNumber(String number) {
-           ...
-           counterModel.update(this);	//新添line
-           ...
-       }
-   ```
-
-### 对MVVM模式优缺点的一些讨论
-
-1. 由于展示逻辑被抽取到了视图模型中，所以 视图的代码将会变得非常轻量级。
-
+1. 由于展示逻辑被抽取到了视图模型中，所以 视图的代码将会变得轻量级。
 2. 在可复用性方面，一个视图模型可以复用到多个视图中，同样的一份数据，可以用于不同的界面展示。 
-
 3. 在可修改性方面，如果一个model 封装了大量业务逻辑，那么改变它可能会比较困难，并且存在一定的风险。在这种场景下，View Model 可以作为 model 的适配器使用，从而避免对 model 进行较大的改动。  
-
 4. MVVM模式中，View Model只负责处理和提供数据，不涉及界面。 如果是MVP模式，遇到需要更改界面的场景，就可能需要改变接口。
+5. 数据绑定使得一个位置的 Bug 被快速传递到别的位置，要定位原始出问题的地方就变得不那么容易了。 看到界面出现异常，有可能是 View 的代码有问题，也可能是 Model 的代码有问题 。
+6. 一个大的模块中，model也会很大，当时长期持有时，不释放内存，就造成了更多的内存花销。
+7. MVVM的创造者John Gossman本人对这种模式的批评指出，实现MVVM的开销对于简单的UI操作是“过度的”。他说，对于更大的应用来说，推广ViewModel变得更加困难。而且，他说明了非常大的应用程序中的数据绑定会导致相当大的内存消耗。
 
-5. MVVM具有良好的可测试性。
-
-   通常来说, 要进行界面测试比较困难,  比如在MVC架构中，我们不得不实例化一个完整的 Controller     以及伴随的 View , 然后去测试View 中的值。现在在MVVM的架构下，展示逻辑移入了View Model，表示逻辑与实际表示分离，然后对View Model的展示逻辑进行测试。
-
-6. 数据绑定使得一个位置的 Bug 被快速传递到别的位置，要定位原始出问题的地方就变得不那么容易了。 看到界面出现异常，有可能是 View 的代码有问题，也可能是 Model 的代码有问题 。
-
-7. 一个大的模块中，model也会很大，当时长期持有时，不释放内存，就造成了更多的内存花销。
-
-8. MVVM的创造者John Gossman本人对这种模式的批评指出，实现MVVM的开销对于简单的UI操作是“过度的”。他说，对于更大的应用来说，推广ViewModel变得更加困难。而且，他说明了非常大的应用程序中的数据绑定会导致相当大的内存消耗。
 
 ## FRP
 
