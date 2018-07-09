@@ -37,11 +37,10 @@ public class MVCFragment extends Fragment implements View.OnClickListener {
         return rootView;
     }
 
-    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.mvc_add:
-                numberController.plusOne(new NumberController.OnPlusListener() {
+                numberController.plusOne(new onPlusListener() {
                     @Override
                     public void onComplete(NumberModel numberModel) {
                         TextView textView = (TextView)rootview.findViewById(R.id.mvc_number);
@@ -50,7 +49,7 @@ public class MVCFragment extends Fragment implements View.OnClickListener {
                 });
                 break;
             case R.id.mvc_sub:
-                numberController.minusOne(new NumberController.OnMinusListener() {
+                numberController.minusOne(new onMinusListener() {
                     @Override
                     public void onComplete(NumberModel numberModel) {
                         TextView textView = (TextView)rootview.findViewById(R.id.mvc_number);
@@ -59,5 +58,13 @@ public class MVCFragment extends Fragment implements View.OnClickListener {
                 });
                 break;
         }
+    }
+
+    public interface onPlusListener {
+        void onComplete(NumberModel numberModel);
+    }
+
+    public interface onMinusListener {
+        void onComplete(NumberModel numberModel);
     }
 }

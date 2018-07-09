@@ -1,6 +1,7 @@
 package cn.edu.nju.candleflame.architecturedemo.mvc.model;
 
 import cn.edu.nju.candleflame.architecturedemo.mvc.bean.NumberBean;
+import cn.edu.nju.candleflame.architecturedemo.mvc.view.MVCFragment;
 
 public class NumberModel {
 
@@ -17,10 +18,16 @@ public class NumberModel {
         number.setNum(num);
     }
 
-    public void Plus(){
+    public void Plus(MVCFragment.onPlusListener listener){
         number.setNum(number.getNum()+1);
+        if (listener != null) {
+            listener.onComplete(this);
+        }
     }
-    public void Minus(){
+    public void Minus(MVCFragment.onMinusListener listener){
         number.setNum(number.getNum()-1);
+        if (listener != null) {
+            listener.onComplete(this);
+        }
     }
 }
